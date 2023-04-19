@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Home, Login, Public } from "./container/public";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const { test } = useSelector((stale) => stale.app);
-  console.log(test);
   return (
     <>
-      <div className="text-xl">app</div>
+      <div className="text-xl">
+        <Routes>
+          <Route></Route>
+        </Routes>
+      </div>
       <ToastContainer position="botton-right" />
     </>
   );
