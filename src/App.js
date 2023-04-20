@@ -1,19 +1,39 @@
-import { useState } from "react";
-import { Home, Login, Public } from "./container/public";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import Wrapper from "./components/Wrapper/Wrapper";
+import { DefaultLayout } from "./layouts/";
+import Controls from "./layouts/components/Controls";
+import { privateRoutes } from "./routes";
 
 function App() {
   return (
-    <>
-      <div className="text-xl">
+    <Router>
+      <div className="App">
         <Routes>
-          <Route></Route>
+          {privateRoutes.map((route, index) => {
+            const Layout = route.layout || DefaultLayout;
+            const Comp = route.component;
+            return (
+              <Route
+                path={route.path}
+                key={index}
+                element={
+                  <div>
+                    <Wrapper>
+                      <Layout>
+                        <Comp />
+                      </Layout>
+                      <div className="control_music">
+                        <Controls />
+                      </div>
+                    </Wrapper>
+                  </div>
+                }
+              />
+            );
+          })}
         </Routes>
       </div>
-      <ToastContainer position="botton-right" />
-    </>
+    </Router>
   );
 }
 
